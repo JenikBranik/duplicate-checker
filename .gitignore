@@ -1,0 +1,18 @@
+# Virtuální prostředí
+.venv/
+venv/
+env/
+
+# Python cache (zkompilované soubory)
+__pycache__/
+*.pyc
+
+# PyCharm nastavení (to je specifické pro tvůj počítač)
+.idea/
+
+# Dočasné soubory testů
+.pytest_cache/
+.coverage
+
+# Ostatní
+.DS_Store
