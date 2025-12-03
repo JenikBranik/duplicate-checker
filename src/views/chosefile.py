@@ -1,14 +1,18 @@
-import os
 import tkinter as tk
+from pathlib import Path
 from tkinter import filedialog
+from src.utils.targetfolder import TargetFolder
 
 def chose_file():
-    chosen_file = os.path.join(os.path.expanduser("~"), "Downloads")
     root = tk.Tk()
     root.withdraw()
 
-    inputFile = filedialog.askopenfilename(
-        title="Chose file to scan",
-        initialdir=chosen_file
-    )
-    return inputFile
+    initial_dir = Path.home() / "Downloads"
+
+    path_to_scan = filedialog.askdirectory(initialdir=initial_dir,mustexist=True)
+    root.destroy()
+
+    if not path_to_scan:
+        raise ValueError("Nebyla vybrána žádná složka.")
+
+    return TargetFolder(path_to_scan)
