@@ -1,4 +1,3 @@
-from utils.targetfolder import TargetFolder
 from finder.scanner import ParallelScanner
 from views.chosefile import chose_file
 
