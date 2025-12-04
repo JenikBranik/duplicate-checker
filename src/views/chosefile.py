@@ -13,6 +13,6 @@ def chose_file():
     root.destroy()
 
     if not path_to_scan:
-        raise ValueError("Nebyla vybrána žádná složka.")
+        raise ValueError("Nothing to do")
 
     return TargetFolder(path_to_scan)
