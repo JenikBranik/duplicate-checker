@@ -1,5 +1,6 @@
 import multiprocessing
 import time
+
 from src.utils.targetfolder import TargetFolder
 from src.finder.hasher import FileHasher
 from src.lib.filesbysize import get_files_by_size
