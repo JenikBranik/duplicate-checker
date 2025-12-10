@@ -4,6 +4,11 @@ from tkinter import filedialog
 from src.utils.targetfolder import TargetFolder
 
 def chose_file():
+    """
+    A method based on the tkinter library that
+    invokes a filedialog for folder selection
+    :return:
+    """
     root = tk.Tk()
     root.withdraw()
 
@@ -13,6 +18,6 @@ def chose_file():
     root.destroy()
 
     if not path_to_scan:
-        raise ValueError("Nebyla vybrána žádná složka.")
+        raise ValueError("Nothing to do")
 
     return TargetFolder(path_to_scan)
