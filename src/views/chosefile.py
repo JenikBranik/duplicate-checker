@@ -4,6 +4,11 @@ from tkinter import filedialog
 from src.utils.targetfolder import TargetFolder
 
 def chose_file():
+    """
+    A method based on the tkinter library that
+    invokes a filedialog for folder selection
+    :return:
+    """
     root = tk.Tk()
     root.withdraw()
 
