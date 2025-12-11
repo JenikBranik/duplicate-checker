@@ -1,5 +1,7 @@
 import multiprocessing
+import os
 import time
+from collections import defaultdict
 
 from src.utils.targetfolder import TargetFolder
 from src.finder.hasher import FileHasher
@@ -7,7 +9,7 @@ from src.lib.filesbysize import get_files_by_size
 
 
 class ParallelScanner:
-    def __init__(self, target: TargetFolder):
+    def __init__(self, target: list[TargetFolder]):
         self.target_folder = target
         self.duration = None
         self.duplicates = []
@@ -17,7 +19,20 @@ class ParallelScanner:
         Main method for scanning a file
         """
         start_time = time.time()
-        potential_duplicate_files = get_files_by_size(self.target_folder)
+        files_grouped_by_size = defaultdict(list)
+
+        for target_folder in self.target_folder:
+            groups_in_folder = get_files_by_size(target_folder)
+
+            for group in groups_in_folder:
+
+                try:
+                    size = os.path.getsize(group[0])
+                    files_grouped_by_size[size].extend(group)
+                except OSError:
+                    pass
+
+        potential_duplicate_files = [group for group in files_grouped_by_size.values() if len(group) > 1]
         cpu_count = multiprocessing.cpu_count()
         final_results = []
 
