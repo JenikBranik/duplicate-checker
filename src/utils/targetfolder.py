@@ -24,11 +24,14 @@ class TargetFolder:
             raise TypeError("Folder has to be chosen")
         if not path_object.is_dir():
             raise FileNotFoundError(f"Chosen folder aint folder")
+        if not target_folder.strip():
+            raise FileNotFoundError(f"Chosen folder aint folder")
+
         try:
             with os.scandir(target_folder):
                 pass
         except PermissionError:
-            raise PermissionError(f"Error with access")
-        except OSError as e:
-            raise PermissionError(f"System error")
+            raise PermissionError("Permission denied")
+        except OSError:
+            raise OSError(f"System error")
         self.target_folder = target_folder
