@@ -14,5 +14,9 @@ class DuplicateController:
             app.scan()
             print(app)
 
-        except (FileNotFoundError, NotADirectoryError, ValueError) as e:
-            print(f"\nError: {e}")
+        except FileNotFoundError as error:
+            raise FileNotFoundError(f"Error : {error}")
+        except ValueError as error:
+            raise ValueError(f"Error : {error}")
+        except NotADirectoryError as error:
+            raise NotADirectoryError(f"Error : {error}")

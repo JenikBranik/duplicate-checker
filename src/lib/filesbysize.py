@@ -11,11 +11,13 @@ def get_files_by_size(target_object) -> list[list[Path]]:
     path_string = target_object.get_target_folder
 
     for item in Path(path_string).rglob('*'):
-        if item.is_file():
-            try:
+        try:
+            if item.is_file():
                 size = item.stat().st_size
                 size_map[size].append(item)
-            except OSError:
-                continue
+        except PermissionError:
+            continue
+        except OSError:
+            continue
 
     return [group for group in size_map.values() if len(group) > 1]
